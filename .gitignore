@@ -50,4 +50,4 @@ Thumbs.db
 
 # Test skins (user's personal files)
 *.png
-!example_skin.png
+!image.png

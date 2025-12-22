@@ -2,7 +2,7 @@
 
 Convert Minecraft player skins into 3D block sculptures as Litematica schematic files.
 
-![Example](https://via.placeholder.com/600x200?text=Player+Sculptures)
+![Example](image.png)
 
 ## Features
 
