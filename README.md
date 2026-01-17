@@ -6,11 +6,11 @@ Convert Minecraft player skins into 3D block sculptures as Litematica schematic 
 
 ## Features
 
-- 🎮 **Fetch by Username** - Automatically download skins from Mojang API
-- 👤 **Slim Skin Support** - Handles both Alex (3px arms) and Steve (4px arms) models
-- 🎨 **Overlay Layers** - Hat, jacket, sleeves rendered as separate outer layer
-- 📦 **Batch Convert** - Convert multiple players into one schematic
-- 🧱 **Optimized Palette** - Uses only wool, concrete, and terracotta blocks
+-  **Fetch by Username** - Automatically download skins from Mojang API
+-  **Slim Skin Support** - Handles both Alex (3px arms) and Steve (4px arms) models
+-  **Overlay Layers** - Hat, jacket, sleeves rendered as separate outer layer
+-  **Batch Convert** - Convert multiple players into one schematic
+-  **Optimized Palette** - Uses only wool, concrete, and terracotta blocks
 
 ## Installation
 
