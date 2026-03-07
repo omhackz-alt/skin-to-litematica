@@ -112,55 +112,56 @@ def create_body_part_surface(
     Create only the surface blocks of a body part (1 block thick shell).
     
     FRONT FACE IS RENDERED LAST so its blocks take priority at corners.
+    Mapping assumes statue faces South (+Z).
     """
     width, height, depth = dimensions
     pos_x, pos_y, pos_z = position
     
-    # BACK face - rendered first (lowest priority)
+    # BACK face (North, -Z) - rendered first (lowest priority)
     for y in range(height):
         for x in range(width):
-            block = get_pixel_block(textures.back, width - 1 - x, y)
+            block = get_pixel_block(textures.back, x, y)
             if block:
                 wy = pos_y + (height - 1 - y)
-                model.set_block(pos_x + x, wy, pos_z + depth - 1, block)
+                model.set_block(pos_x + width - 1 - x, wy, pos_z, block)
     
-    # BOTTOM face
+    # BOTTOM face (Down, -Y)
     for z in range(depth):
         for x in range(width):
             block = get_pixel_block(textures.bottom, x, z)
             if block:
-                model.set_block(pos_x + x, pos_y, pos_z + z, block)
+                model.set_block(pos_x + x, pos_y, pos_z + depth - 1 - z, block)
     
-    # TOP face
+    # TOP face (Up, +Y)
     for z in range(depth):
         for x in range(width):
-            block = get_pixel_block(textures.top, x, depth - 1 - z)
+            block = get_pixel_block(textures.top, x, z)
             if block:
                 model.set_block(pos_x + x, pos_y + height - 1, pos_z + z, block)
     
-    # LEFT face
+    # LEFT face (Statue's Left = East, +X)
     for y in range(height):
         for z in range(depth):
-            block = get_pixel_block(textures.left, depth - 1 - z, y)
+            block = get_pixel_block(textures.left, z, y)
             if block:
                 wy = pos_y + (height - 1 - y)
-                model.set_block(pos_x, wy, pos_z + z, block)
+                model.set_block(pos_x + width - 1, wy, pos_z + depth - 1 - z, block)
     
-    # RIGHT face
+    # RIGHT face (Statue's Right = West, -X)
     for y in range(height):
         for z in range(depth):
             block = get_pixel_block(textures.right, z, y)
             if block:
                 wy = pos_y + (height - 1 - y)
-                model.set_block(pos_x + width - 1, wy, pos_z + z, block)
+                model.set_block(pos_x, wy, pos_z + z, block)
     
-    # FRONT face - rendered LAST (highest priority, overwrites corners)
+    # FRONT face (South, +Z) - rendered LAST (highest priority, overwrites corners)
     for y in range(height):
         for x in range(width):
             block = get_pixel_block(textures.front, x, y)
             if block:
                 wy = pos_y + (height - 1 - y)
-                model.set_block(pos_x + x, wy, pos_z, block)
+                model.set_block(pos_x + x, wy, pos_z + depth - 1, block)
 
 
 def create_overlay_surface(
@@ -172,6 +173,7 @@ def create_overlay_surface(
     """
     Create overlay layer 1 block outside the base part.
     FRONT FACE IS RENDERED LAST so its blocks take priority at corners.
+    Mapping assumes statue faces South (+Z).
     """
     width, height, depth = base_dimensions
     pos_x, pos_y, pos_z = position
@@ -184,51 +186,51 @@ def create_overlay_surface(
     overlay_width = width + 2
     overlay_height = height + 2
     
-    # BACK face - rendered first (lowest priority)
+    # BACK face (North, -Z)
     for y in range(height):
         for x in range(width):
-            block = get_pixel_block(textures.back, width - 1 - x, y)
+            block = get_pixel_block(textures.back, x, y)
             if block:
                 wy = overlay_pos_y + 1 + (height - 1 - y)
-                model.set_block(overlay_pos_x + 1 + x, wy, overlay_pos_z + overlay_depth - 1, block)
+                model.set_block(overlay_pos_x + 1 + width - 1 - x, wy, overlay_pos_z, block)
     
-    # BOTTOM face
+    # BOTTOM face (Down, -Y)
     for z in range(depth):
         for x in range(width):
             block = get_pixel_block(textures.bottom, x, z)
             if block:
-                model.set_block(overlay_pos_x + 1 + x, overlay_pos_y, overlay_pos_z + 1 + z, block)
+                model.set_block(overlay_pos_x + 1 + x, overlay_pos_y, overlay_pos_z + 1 + depth - 1 - z, block)
     
-    # TOP face
+    # TOP face (Up, +Y)
     for z in range(depth):
         for x in range(width):
-            block = get_pixel_block(textures.top, x, depth - 1 - z)
+            block = get_pixel_block(textures.top, x, z)
             if block:
                 model.set_block(overlay_pos_x + 1 + x, overlay_pos_y + overlay_height - 1, overlay_pos_z + 1 + z, block)
     
-    # LEFT face
+    # LEFT face (Statue's Left = East, +X)
     for y in range(height):
         for z in range(depth):
-            block = get_pixel_block(textures.left, depth - 1 - z, y)
+            block = get_pixel_block(textures.left, z, y)
             if block:
                 wy = overlay_pos_y + 1 + (height - 1 - y)
-                model.set_block(overlay_pos_x, wy, overlay_pos_z + 1 + z, block)
+                model.set_block(overlay_pos_x + overlay_width - 1, wy, overlay_pos_z + 1 + depth - 1 - z, block)
     
-    # RIGHT face
+    # RIGHT face (Statue's Right = West, -X)
     for y in range(height):
         for z in range(depth):
             block = get_pixel_block(textures.right, z, y)
             if block:
                 wy = overlay_pos_y + 1 + (height - 1 - y)
-                model.set_block(overlay_pos_x + overlay_width - 1, wy, overlay_pos_z + 1 + z, block)
+                model.set_block(overlay_pos_x, wy, overlay_pos_z + 1 + z, block)
     
-    # FRONT face - rendered LAST (highest priority, overwrites corners)
+    # FRONT face (South, +Z)
     for y in range(height):
         for x in range(width):
             block = get_pixel_block(textures.front, x, y)
             if block:
                 wy = overlay_pos_y + 1 + (height - 1 - y)
-                model.set_block(overlay_pos_x + 1 + x, wy, overlay_pos_z, block)
+                model.set_block(overlay_pos_x + 1 + x, wy, overlay_pos_z + overlay_depth - 1, block)
 
 
 def assemble_player_model(
