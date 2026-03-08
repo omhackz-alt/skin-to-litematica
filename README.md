@@ -114,10 +114,6 @@ skin-to-litematica/
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-## Contributing
-
-Contributions are welcome! Please open an issue or pull request.
-
 ## Credits
 
 - Uses [litemapy](https://github.com/SmylerMC/litemapy) for schematic generation
